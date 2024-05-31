@@ -43,6 +43,7 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.ktor.client.core)
+            implementation(libs.kotlinx.coroutines.core)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -88,5 +89,6 @@ android {
 }
 dependencies {
     implementation(libs.androidx.ui.graphics.android)
+    implementation(libs.kotlinx.coroutines.android)
 }
 
