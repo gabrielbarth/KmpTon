@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val helloWorld: String
 ): ViewModel() {
 
     private val _timer = MutableStateFlow(0)
@@ -16,7 +15,6 @@ class MainViewModel(
 
     init {
         startTimer()
-        println(helloWorld)
     }
 
     private fun startTimer(){
