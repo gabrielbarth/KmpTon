@@ -24,7 +24,7 @@ internal fun HomeRoute(
 
 @Composable
 internal fun HomeScreen(
-    productGridUiState: ProductGridUiState, // todo remove ?
+    productGridUiState: ProductGridUiState,
 //    bannersUiState: BannersUiState?,
     modifier: Modifier = Modifier
 ) {
@@ -35,10 +35,10 @@ internal fun HomeScreen(
             )
         }
         is ProductGridUiState.Loading -> {
-            Text("Loading") // TODO
+            Text("Loading")
         }
         else -> {
-            Text("Error") // TODO
+            Text("Error")
         }
     }
 
