@@ -52,6 +52,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.lifecycle.viewmodel)
             implementation(libs.navigation.compose)
+            implementation(project(":features:home"))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
