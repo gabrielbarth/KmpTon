@@ -19,13 +19,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinContext
 import org.koin.compose.currentKoinScope
 import ui.MainViewModel
+
+import com.example.home.navigation.addHomeScreen
 
 @Composable
 @Preview
@@ -35,69 +39,11 @@ fun App() {
             val navController = rememberNavController()
             NavHost(
                 navController = navController,
-                startDestination = "screenA"
+                startDestination = "home"
             ) {
-                composable("ScreenA") {
-                    val viewModel = koinViewModel<MainViewModel>()
-                    val timer by viewModel.timer.collectAsState()
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = timer.toString()
-                        )
-                    }
-                }
+                addHomeScreen()
             }
         }
-    }
-}
-
-@Composable
-fun ProductGrid(items: List<Color>) {
-    Surface(color = MaterialTheme.colors.background) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            val rows = (items.size + 2) / 3
-            repeat(rows) { rowIndex ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    val start = rowIndex * 3
-                    val end = minOf(start + 3, items.size)
-                    for (i in start until end) {
-                        ProductItem(color = items[i])
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-@Composable
-fun ProductItem(color: Color) {
-    Surface(
-        modifier = Modifier.size(100.dp),
-        shape = RoundedCornerShape(8.dp),
-        color = color
-    ) {
-        // TODO
-    }
-}
-
-@Composable
-inline fun <reified T: ViewModel> koinViewModel(): T {
-    val scope = currentKoinScope()
-    return viewModel {
-        scope.get<T>()
     }
 }
 
