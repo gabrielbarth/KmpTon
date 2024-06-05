@@ -1,4 +1,4 @@
-package data
+package com.example.home.data
 
 data class ProductItem(val id: Int, val title: String)
 

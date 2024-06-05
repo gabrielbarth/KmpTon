@@ -1,6 +1,6 @@
-package di
+package com.example.home.di
 
-import data.ProductGridRepository
+import com.example.home.data.ProductGridRepository
 import org.koin.dsl.module
 
 val dataModule = module {
