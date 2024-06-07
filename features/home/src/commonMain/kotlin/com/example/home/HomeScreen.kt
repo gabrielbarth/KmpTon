@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import com.example.home.components.ProductGrid
 
 @Composable
-internal fun HomeRoute(
+fun HomeRoute(
     modifier: Modifier = Modifier,
     homeViewModel: HomeViewModel = HomeViewModel()
 ) {

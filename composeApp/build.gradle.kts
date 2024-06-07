@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinX.serialization)
 }
 
 kotlin {
@@ -34,7 +35,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
-
+            implementation(libs.koin.android)
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
         }
@@ -45,17 +46,31 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.ktor.client.core)
+
             implementation(libs.kotlinx.coroutines.core)
 
-            api(libs.koin.core)
+            implementation(libs.koin.core)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
             implementation(libs.koin.compose)
             implementation(libs.lifecycle.viewmodel)
+
+            implementation(libs.voyager.navigator)
             implementation(libs.navigation.compose)
+
+            implementation(libs.kotlinx.serialization.core)
+            implementation(libs.kotlinx.serialization.json)
+
             implementation(project(":features:home"))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.essenty.lifecycle)
+            implementation(libs.compose.decompose)
         }
     }
 }
