@@ -2,25 +2,31 @@ package com.example.home
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
+import cafe.adriel.voyager.core.model.StateScreenModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class HomeViewModel(
 // todo: get banners and product grid from repositories
 //    productsGridRepository: ProductGridRepository,
 //    bannersRepository: BannersRepository
-) : ViewModel() {
-
-    val productGridUiState =  MutableStateFlow<ProductGridUiState>(
-        ProductGridUiState.Success(
-            listOf(Color.Red, Color.Blue, Color.Green)
-        )
-    ).asStateFlow()
+) : StateScreenModel<ProductGridUiState>(ProductGridUiState.Loading) {
 
     val bannersUiState = MutableStateFlow<BannersUiState?>(null).asStateFlow()
-}
 
+    init {
+        getData()
+    }
+    fun getData() {
+        mutableState.update {
+            ProductGridUiState.Success(
+                listOf(Color.Red, Color.Blue, Color.Green)
+            )
+        }
+    }
+}
 
 
 sealed interface ProductGridUiState {

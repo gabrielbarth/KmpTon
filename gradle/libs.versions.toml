@@ -28,6 +28,7 @@ voyagerScreenmodel = "1.0.0"
 decomposeVersion = "3.0.0"
 navigationCompose = "2.7.0-alpha03"
 navigationComposeVersion = "2.7.7"
+stately = "1.2.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -69,6 +70,7 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
+stately = { module = "co.touchlab:stately-common", version.ref = "stately" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyagerScreenmodel" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerScreenmodel" }
 voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyagerScreenmodel" }
