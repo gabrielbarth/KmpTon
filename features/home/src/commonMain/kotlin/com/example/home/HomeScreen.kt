@@ -1,13 +1,18 @@
 package com.example.home
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -42,13 +47,32 @@ class HomeScreen : Screen {
         when (homeUiState) {
             is HomeUiState.Success -> {
                 Column(
-                    modifier = modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    modifier = modifier.fillMaxSize().background(Color(0xFF00EA33)),
                 ) {
                     Header()
-                    Balance()
-                    BannerList(homeUiState.banners)
-                    ProductGrid(homeUiState.products)
+                    Surface(
+                        color = MaterialTheme.colors.background,
+                        shape = RoundedCornerShape(
+                            topStart = 32.dp,
+                            topEnd = 32.dp,
+                            bottomStart = 0.dp,
+                            bottomEnd = 0.dp
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Balance()
+                            BannerList(homeUiState.banners)
+                            Divider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            )
+                            ProductGrid(homeUiState.products)
+                        }
+                    }
                 }
             }
 
@@ -67,12 +91,38 @@ class HomeScreen : Screen {
 
 @Composable
 fun Header() {
-    Text("Header")
+    Row (
+        modifier = Modifier
+            .fillMaxWidth().height(68.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ){
+        Text(text = "Home", style = MaterialTheme.typography.h6)
+    }
 }
 
 @Composable
 fun Balance() {
-    Text("Balance")
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                modifier = Modifier.padding(top = 12.dp, bottom = 10.dp),
+                text = "Future Balance"
+            )
+            Divider(
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+            Text(
+                modifier = Modifier.padding(12.dp),
+                text = "Current Balance"
+            )
+        }
+
 }
 
 @Composable
