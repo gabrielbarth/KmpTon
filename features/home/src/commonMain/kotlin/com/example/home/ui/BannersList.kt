@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
@@ -43,14 +44,35 @@ fun BannersList(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LazyRow(
-            modifier = Modifier.wrapContentHeight().fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            state = state,
-            flingBehavior = flingBehavior,
-        ) {
-            itemsIndexed(items) { index, item ->
-                Banner(item, modifier = modifier)
+        BoxWithConstraints {
+            LazyRow(
+                modifier = Modifier.wrapContentHeight().fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                state = state,
+                flingBehavior = flingBehavior,
+            ) {
+                itemsIndexed(items) { index, item ->
+                    Layout(
+                        content = {
+                            Banner(item, modifier = modifier)
+                        },
+                        measurePolicy = { measurables, constraints ->
+                            val placeable = measurables.first().measure(constraints)
+                            val maxWidthInPx = maxWidth.roundToPx()
+                            val itemWidth = placeable.width
+                            val startSpace =
+                                if (index == 0) (maxWidthInPx - itemWidth) / 2 else 0
+                            val endSpace =
+                                if (index == items.lastIndex) (maxWidthInPx - itemWidth) / 2 else 0
+                            val width = startSpace + placeable.width + endSpace
+                            layout(width, placeable.height) {
+                                val x = if (index == 0) startSpace else 0
+                                placeable.place(x, 0)
+                            }
+                        }
+                    )
+
+                }
             }
         }
         Text("1/2")
