@@ -1,8 +1,11 @@
 package com.example.home
 
+
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -25,6 +28,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
+import com.example.home.ui.Balance
+import com.example.home.ui.BannersList
+import com.example.home.ui.ProductGrid
+import com.example.theme.AppTheme
+import com.example.theme.resources.Res
+import com.example.theme.resources.menu_hamburger
+import org.jetbrains.compose.resources.painterResource
 
 
 class HomeScreen : Screen {
@@ -45,11 +55,11 @@ class HomeScreen : Screen {
         modifier: Modifier = Modifier
     ) {
         when (homeUiState) {
-            is HomeUiState.Success -> {
+            is HomeUiState.Default -> {
                 Column(
                     modifier = modifier.fillMaxSize().background(Color(0xFF00EA33)),
                 ) {
-                    Header()
+                    Header(modifier = modifier)
                     Surface(
                         color = MaterialTheme.colors.background,
                         shape = RoundedCornerShape(
@@ -61,28 +71,20 @@ class HomeScreen : Screen {
                     ) {
                         Column(
                             modifier = Modifier.fillMaxWidth(),
-                            verticalArrangement = Arrangement.spacedBy(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(AppTheme.space.large),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Balance()
-                            BannerList(homeUiState.banners)
-                            Divider(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                            )
-                            ProductGrid(homeUiState.products)
+                            UserBalance(homeUiState.balanceUiState)
+                            Banners(homeUiState.bannersUiState)
+                            Divider(modifier = Modifier.fillMaxWidth())
+                            Products(homeUiState.productGridUiState)
                         }
                     }
                 }
             }
-
             is HomeUiState.Loading -> {
                 Text("Loading")
             }
-
-            else -> {
-                Text("Error")
-            }
         }
 
     }
@@ -90,67 +92,85 @@ class HomeScreen : Screen {
 }
 
 @Composable
-fun Header() {
-    Row (
-        modifier = Modifier
+fun Header(userFullName: String = "Nome Sobrenome", modifier: Modifier) {
+    Box(
+        modifier = modifier
             .fillMaxWidth().height(68.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ){
-        Text(text = "Home", style = MaterialTheme.typography.h6)
+    ) {
+        Row (
+            modifier = modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Image(
+                painter = painterResource(Res.drawable.menu_hamburger),
+                contentDescription = "Menu",
+                modifier = modifier.size(AppTheme.shape.extraLarge).padding(start = AppTheme.space.large)
+            )
+        }
+        Row (
+            modifier = modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ){
+                Text(
+                    text = userFullName,
+                    style = MaterialTheme.typography.h6,
+                )
+            }
     }
 }
 
 @Composable
-fun Balance() {
+fun UserBalance(balanceUiState: BalanceUiState) {
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                modifier = Modifier.padding(top = 12.dp, bottom = 10.dp),
-                text = "Future Balance"
-            )
-            Divider(
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
-            Text(
-                modifier = Modifier.padding(12.dp),
-                text = "Current Balance"
-            )
+    when (balanceUiState) {
+        is BalanceUiState.Success -> {
+            Balance()
         }
-
+        is BalanceUiState.Loading -> {
+            Text("Loading")
+        }
+        is BalanceUiState.Error -> {
+            Text("Error")
+        }
+    }
 }
 
 @Composable
-fun BannerList(items: List<Color>) {
-    Text("BannerList")
+fun Banners(bannersUiState: BannersUiState) {
+    when (bannersUiState) {
+        is BannersUiState.Success -> {
+            BannersList()
+        }
+        is BannersUiState.Loading -> {
+            Text("Loading")
+        }
+        is BannersUiState.Error -> {
+
+        }
+    }
 }
 
 @Composable
-fun ProductGrid(items: List<Color>) {
+fun Products(productGridUiState: ProductGridUiState) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+                .padding(AppTheme.space.large),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.space.large),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val rows = (items.size + 2) / 3
-            repeat(rows) { rowIndex ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    val start = rowIndex * 3
-                    val end = minOf(start + 3, items.size)
-                    for (i in start until end) {
-                        ProductItem(color = items[i])
-                    }
+            when (productGridUiState) {
+                is ProductGridUiState.Success -> {
+                    val items = productGridUiState.products
+                    ProductGrid(items)
+                }
+                is ProductGridUiState.Loading -> {
+                    Text("Loading")
+                }
+                is ProductGridUiState.Error -> {
+                    Text("Error")
                 }
             }
         }

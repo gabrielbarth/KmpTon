@@ -1,4 +1,4 @@
-package com.example.home.components
+package com.example.home.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,35 +15,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-
+import com.example.theme.AppTheme
 
 @Composable
-fun ProductGrid(items: List<Color>) {
-    Surface(color = MaterialTheme.colors.background) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+fun ProductGrid(items: List<Color>, modifier: Modifier = Modifier) {
+    val rows = (items.size + 2) / 3
+    repeat(rows) { rowIndex ->
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.space.large)
         ) {
-            val rows = (items.size + 2) / 3
-            repeat(rows) { rowIndex ->
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    val start = rowIndex * 3
-                    val end = minOf(start + 3, items.size)
-                    for (i in start until end) {
-                        ProductItem(color = items[i])
-                    }
-                }
+            val start = rowIndex * 3
+            val end = minOf(start + 3, items.size)
+            for (i in start until end) {
+                ProductItem(color = items[i])
             }
         }
     }
 }
-
 
 @Composable
 fun ProductItem(color: Color) {

@@ -19,16 +19,39 @@ class HomeViewModel(
     }
     fun getData() {
         mutableState.update {
-            HomeUiState.Success(
-                products = listOf(Color.Red, Color.Blue, Color.Green),
-                banners = listOf(Color.Red, Color.Blue, Color.Green)
+            HomeUiState.Default(
+                productGridUiState = ProductGridUiState.Success(listOf(Color.Red, Color.Blue, Color.Green)),
+                bannersUiState = BannersUiState.Success(listOf(Color.Red, Color.Blue, Color.Green)),
+                balanceUiState = BalanceUiState.Success(Color.Red)
             )
         }
     }
 }
 sealed interface HomeUiState {
-    data class Success(val products: List<Color>, val banners: List<Color>) : HomeUiState
-    object Error : HomeUiState
+    data class Default(
+        val productGridUiState: ProductGridUiState,
+        val bannersUiState: BannersUiState,
+        val balanceUiState: BalanceUiState
+    ) : HomeUiState
     object Loading : HomeUiState
+}
+
+
+sealed interface ProductGridUiState {
+    data class Success(val products: List<Color>) : ProductGridUiState
+    object Error : ProductGridUiState
+    object Loading : ProductGridUiState
+}
+
+sealed interface BalanceUiState {
+    data class Success(val balance: Color) : BalanceUiState
+    object Error : BalanceUiState
+    object Loading : BalanceUiState
+}
+
+sealed interface BannersUiState {
+    data class Success(val banners: List<Color>) : BannersUiState
+    object Error : BannersUiState
+    object Loading : BannersUiState
 }
 
