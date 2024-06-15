@@ -5,19 +5,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 data class CustomSpace(
-    val small: Dp = 4.dp,
-    val medium: Dp = 8.dp,
-    val large: Dp = 16.dp,
-    val extraLarge: Dp = 32.dp,
+    val small: Dp = 8.dp,
+    val medium: Dp = 10.dp,
+    val large: Dp = 12.dp,
+    val extraLarge: Dp = 18.dp,
 )
 data class CustomTextSize(
-    val small: Dp = 4.dp,
-    val medium: Dp = 8.dp,
-    val large: Dp = 16.dp,
-    val extraLarge: Dp = 32.dp,
+    val small: TextUnit = 12.sp,
+    val medium: TextUnit = 14.sp,
+    val large: TextUnit = 16.sp,
+    val extraLarge: TextUnit = 18.sp,
 )
 data class CustomTypography(
     val small: Dp = 4.dp,
