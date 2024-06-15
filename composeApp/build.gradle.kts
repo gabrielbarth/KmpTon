@@ -66,6 +66,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(project(":features:home"))
+            implementation(project(":theme"))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -114,5 +115,6 @@ android {
 dependencies {
     implementation(libs.androidx.ui.graphics.android)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(project(":theme"))
 }
 

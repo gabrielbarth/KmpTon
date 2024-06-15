@@ -42,6 +42,7 @@ kotlin {
             implementation(libs.voyager.screenmodel)
             implementation(libs.voyager.koin)
             implementation(libs.stately)
+            implementation(project(":theme"))
 
         }
         commonTest.dependencies {
@@ -61,3 +62,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+dependencies {
+    implementation(project(":theme"))
+}
+
