@@ -30,6 +30,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import com.example.home.ui.Balance
 import com.example.home.ui.BannersList
+import com.example.home.ui.Header
 import com.example.home.ui.ProductGrid
 import com.example.theme.AppTheme
 import com.example.theme.resources.Res
@@ -91,34 +92,6 @@ class HomeScreen : Screen {
 
 }
 
-@Composable
-fun Header(userFullName: String = "Nome Sobrenome", modifier: Modifier) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth().height(68.dp),
-    ) {
-        Row (
-            modifier = modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Image(
-                painter = painterResource(Res.drawable.menu_hamburger),
-                contentDescription = "Menu",
-                modifier = modifier.size(AppTheme.shape.extraLarge).padding(start = AppTheme.space.large)
-            )
-        }
-        Row (
-            modifier = modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ){
-                Text(
-                    text = userFullName,
-                    style = MaterialTheme.typography.h6,
-                )
-            }
-    }
-}
 
 @Composable
 fun UserBalance(balanceUiState: BalanceUiState) {
@@ -174,16 +147,5 @@ fun Products(productGridUiState: ProductGridUiState) {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun ProductItem(color: Color) {
-    Surface(
-        modifier = Modifier.size(100.dp),
-        shape = RoundedCornerShape(8.dp),
-        color = color
-    ) {
-        // TODO
     }
 }
