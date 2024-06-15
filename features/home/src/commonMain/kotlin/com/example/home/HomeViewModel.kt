@@ -12,31 +12,23 @@ class HomeViewModel(
 // todo: get banners and product grid from repositories
 //    productsGridRepository: ProductGridRepository,
 //    bannersRepository: BannersRepository
-) : StateScreenModel<ProductGridUiState>(ProductGridUiState.Loading) {
-
-    val bannersUiState = MutableStateFlow<BannersUiState?>(null).asStateFlow()
+) : StateScreenModel<HomeUiState>(HomeUiState.Loading) {
 
     init {
         getData()
     }
     fun getData() {
         mutableState.update {
-            ProductGridUiState.Success(
-                listOf(Color.Red, Color.Blue, Color.Green)
+            HomeUiState.Success(
+                products = listOf(Color.Red, Color.Blue, Color.Green),
+                banners = listOf(Color.Red, Color.Blue, Color.Green)
             )
         }
     }
 }
-
-
-sealed interface ProductGridUiState {
-    data class Success(val products: List<Color>) : ProductGridUiState
-    object Error : ProductGridUiState
-    object Loading : ProductGridUiState
+sealed interface HomeUiState {
+    data class Success(val products: List<Color>, val banners: List<Color>) : HomeUiState
+    object Error : HomeUiState
+    object Loading : HomeUiState
 }
 
-sealed interface BannersUiState {
-    data class Success(val banners: List<String>) : BannersUiState
-    object Error : BannersUiState
-    object Loading : BannersUiState
-}
