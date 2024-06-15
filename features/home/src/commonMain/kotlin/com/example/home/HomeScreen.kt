@@ -78,7 +78,7 @@ class HomeScreen : Screen {
                             UserBalance(homeUiState.balanceUiState)
                             Banners(homeUiState.bannersUiState)
                             Divider(modifier = Modifier.fillMaxWidth())
-                            Products(homeUiState.productGridUiState)
+                            Products(homeUiState.productGridUiState, modifier)
                         }
                     }
                 }
@@ -125,10 +125,10 @@ fun Banners(bannersUiState: BannersUiState) {
 }
 
 @Composable
-fun Products(productGridUiState: ProductGridUiState) {
+fun Products(productGridUiState: ProductGridUiState, modifier: Modifier) {
     Surface(color = MaterialTheme.colors.background) {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(AppTheme.space.large),
             verticalArrangement = Arrangement.spacedBy(AppTheme.space.large),
@@ -137,7 +137,7 @@ fun Products(productGridUiState: ProductGridUiState) {
             when (productGridUiState) {
                 is ProductGridUiState.Success -> {
                     val items = productGridUiState.products
-                    ProductGrid(items)
+                    ProductGrid()
                 }
                 is ProductGridUiState.Loading -> {
                     Text("Loading")
