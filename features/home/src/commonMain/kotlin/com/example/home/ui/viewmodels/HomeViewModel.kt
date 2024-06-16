@@ -4,6 +4,8 @@ import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 
 import kotlinx.coroutines.flow.update
@@ -15,27 +17,30 @@ class HomeViewModel(
 ) : StateScreenModel<HomeUiState>(HomeUiState.Loading) {
 
     init {
-        combine(
-            productsViewModel.state,
-            bannersViewModel.state
-        ) { states ->
-            val (productGridUiState, bannersUiState) = states
 
-            mutableState.update {
-                HomeUiState.Default(
-                    productGridUiState = productGridUiState as ProductGridUiState,
-                    bannersUiState = bannersUiState as BannersUiState,
-                    balanceUiState = BalanceUiState.Success(Color.Red)
-                )
-            }
-        }
+        combineViewModelStates()
 
         screenModelScope.launch {
             getData()
         }
     }
 
+
+    private fun combineViewModelStates() {
+        val combinedFlow = productsViewModel.state.combine(bannersViewModel.state) { productState, bannersState ->
+            HomeUiState.Default(
+                productGridUiState = productState as ProductGridUiState,
+                bannersUiState = bannersState as BannersUiState,
+                balanceUiState = BalanceUiState.Success(Color.Red)
+            )
+        }
+        combinedFlow.onEach { newState ->
+            mutableState.value = newState
+        }.launchIn(screenModelScope)
+    }
+
     suspend fun getData() {
+        println("ViewModel get data")
         productsViewModel.fetchProducts()
         bannersViewModel.fetchBanners()
     }

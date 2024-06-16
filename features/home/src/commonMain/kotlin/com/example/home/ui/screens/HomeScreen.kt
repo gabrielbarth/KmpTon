@@ -111,7 +111,7 @@ fun UserBalance(balanceUiState: BalanceUiState) {
 fun Banners(bannersUiState: BannersUiState) {
     when (bannersUiState) {
         is BannersUiState.Success -> {
-            BannersList()
+            BannersList(bannersUiState.banners.banners)
         }
         is BannersUiState.Loading -> {
             Text("Loading")

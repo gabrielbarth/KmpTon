@@ -60,6 +60,8 @@ coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil3" }
 coil-mp = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
 
+
+
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty-lifecycle" }
 compose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decomposeVersion" }
 

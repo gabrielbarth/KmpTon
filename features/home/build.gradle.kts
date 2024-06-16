@@ -26,6 +26,7 @@ kotlin {
     }
 
     sourceSets {
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -46,6 +47,7 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.mp)
             implementation(libs.coil.network.ktor)
+            implementation(libs.kamel.image)
             implementation(project(":theme"))
             implementation(project(":domain"))
 
