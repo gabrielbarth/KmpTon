@@ -65,7 +65,7 @@ fun ProductItem(product: Product, modifier: Modifier) {
 //                modifier = modifier.size(24.dp)
 //            )
             Text(
-                text = product.label,
+                text = product.buttonId,
                 modifier = modifier.padding(top = 4.dp),
                 fontSize = 14.sp,
                 lineHeight = 14.sp

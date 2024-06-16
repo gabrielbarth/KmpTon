@@ -1,12 +1,15 @@
 package com.example.data.dto
 
+import kotlinx.serialization.Serializable
 
+@Serializable
 internal data class ProductsResponseDTO(
-    val products: List<ProductItemResponseDTO>
+    val data: List<ProductItemResponseDTO>
 )
 
+@Serializable
 internal data class ProductItemResponseDTO(
-    val id: String,
-    val label: String
+    val buttonId: String,
+    val order: Int
 )
 

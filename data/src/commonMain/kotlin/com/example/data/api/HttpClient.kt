@@ -10,8 +10,10 @@ import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.headers
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.serializer
 
 private const val BASE_URL = "http://localhost:3000"
+
 
 val ApiClient = HttpClient {
     install(ContentNegotiation) {
