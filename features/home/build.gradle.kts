@@ -47,6 +47,7 @@ kotlin {
             implementation(libs.coil.mp)
             implementation(libs.coil.network.ktor)
             implementation(project(":theme"))
+            implementation(project(":domain"))
 
         }
         commonTest.dependencies {
@@ -68,5 +69,6 @@ android {
 }
 dependencies {
     implementation(project(":theme"))
+    implementation(libs.androidx.foundation.android)
 }
 

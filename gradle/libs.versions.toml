@@ -29,6 +29,7 @@ decomposeVersion = "3.0.0"
 navigationCompose = "2.7.0-alpha03"
 navigationComposeVersion = "2.7.7"
 stately = "1.2.3"
+foundationAndroid = "1.6.8"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -77,6 +78,7 @@ voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", vers
 voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyagerScreenmodel" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerScreenmodel" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationComposeVersion" }
+androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -85,3 +87,4 @@ jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinX-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+native-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
