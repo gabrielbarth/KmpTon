@@ -10,17 +10,27 @@ import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.lifecycle.DefaultScreenLifecycleOwner.onDispose
 import com.example.domain.banners.Banner
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import io.ktor.http.Url
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.stateIn
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -30,6 +40,10 @@ fun BannersList(items: List<Banner>, modifier: Modifier = Modifier) {
     val state = rememberLazyListState()
     val snappingLayout = remember(state) { SnapLayoutInfoProvider(state) }
     val flingBehavior = rememberSnapFlingBehavior(snappingLayout)
+
+    var visibleItemIndex by remember {
+        mutableStateOf(0)
+    }
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -66,7 +80,7 @@ fun BannersList(items: List<Banner>, modifier: Modifier = Modifier) {
                 }
             }
         }
-        Text("1/2")
+        Text("${visibleItemIndex}/${items.size}")
     }
 }
 
