@@ -1,20 +1,15 @@
-package com.example.home
+package com.example.home.ui.screens
 
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -28,14 +23,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
-import com.example.home.ui.Balance
-import com.example.home.ui.BannersList
-import com.example.home.ui.Header
-import com.example.home.ui.ProductGrid
+import com.example.home.ui.viewmodels.BalanceUiState
+import com.example.home.ui.viewmodels.BannersUiState
+import com.example.home.ui.viewmodels.HomeUiState
+import com.example.home.ui.viewmodels.HomeViewModel
+import com.example.home.ui.viewmodels.ProductGridUiState
 import com.example.theme.AppTheme
-import com.example.theme.resources.Res
-import com.example.theme.resources.menu_hamburger
-import org.jetbrains.compose.resources.painterResource
 
 
 class HomeScreen : Screen {
@@ -57,8 +50,13 @@ class HomeScreen : Screen {
     ) {
         when (homeUiState) {
             is HomeUiState.Default -> {
+                val scrollState = rememberScrollState()
                 Column(
-                    modifier = modifier.fillMaxSize().background(Color(0xFF00EA33)),
+                    modifier = modifier
+                        .fillMaxSize()
+                        .background(Color(0xFF00EA33))
+                        .verticalScroll(state = scrollState)
+                    ,
                 ) {
                     Header(modifier = modifier)
                     Surface(
@@ -136,8 +134,8 @@ fun Products(productGridUiState: ProductGridUiState, modifier: Modifier) {
         ) {
             when (productGridUiState) {
                 is ProductGridUiState.Success -> {
-                    val items = productGridUiState.products
-                    ProductGrid()
+                    val products = productGridUiState.products
+                    ProductGrid(products.products)
                 }
                 is ProductGridUiState.Loading -> {
                     Text("Loading")

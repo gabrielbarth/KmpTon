@@ -1,4 +1,4 @@
-package com.example.home.ui
+package com.example.home.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
