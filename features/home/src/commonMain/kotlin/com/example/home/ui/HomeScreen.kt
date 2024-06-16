@@ -1,4 +1,4 @@
-package com.example.home.ui.screens
+package com.example.home.ui
 
 
 import androidx.compose.foundation.background
@@ -28,7 +28,11 @@ import com.example.home.ui.viewmodels.BannersUiState
 import com.example.home.ui.viewmodels.HomeUiState
 import com.example.home.ui.viewmodels.HomeViewModel
 import com.example.home.ui.viewmodels.ProductGridUiState
-import com.example.theme.AppTheme
+import com.example.commons.theme.AppTheme
+import com.example.home.ui.components.Balance
+import com.example.home.ui.components.BannersList
+import com.example.home.ui.components.Header
+import com.example.home.ui.components.ProductGrid
 
 
 class HomeScreen : Screen {
@@ -114,7 +118,7 @@ fun Banners(bannersUiState: BannersUiState) {
             BannersList(bannersUiState.banners.banners)
         }
         is BannersUiState.Loading -> {
-            Text("Loading")
+
         }
         is BannersUiState.Error -> {
 
@@ -138,10 +142,8 @@ fun Products(productGridUiState: ProductGridUiState, modifier: Modifier) {
                     ProductGrid(products.products)
                 }
                 is ProductGridUiState.Loading -> {
-                    Text("Loading")
                 }
                 is ProductGridUiState.Error -> {
-                    Text("Error")
                 }
             }
         }

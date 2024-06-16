@@ -7,5 +7,7 @@ class GetProductsUseCase(
     private val repository: ProductsRepository
 ) : SuspendUseCaseInteractor {
 
-    suspend operator fun invoke(): UseCaseResult<Products> = run(repository.getProducts())
+    suspend operator fun invoke(): UseCaseResult<Products> = run(
+        repository.getProducts()
+    )
 }

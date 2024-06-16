@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinX.serialization)
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
 }
 
 kotlin {
@@ -31,6 +33,9 @@ kotlin {
         commonMain.dependencies {
             //put your multiplatform dependencies here
             implementation(project(":domain"))
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.components.resources)
             implementation(libs.koin.compose)
             implementation(libs.coil.compose.core)
             implementation(libs.ktor.client.core)

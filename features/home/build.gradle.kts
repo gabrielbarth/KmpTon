@@ -48,7 +48,7 @@ kotlin {
             implementation(libs.coil.mp)
             implementation(libs.coil.network.ktor)
             implementation(libs.kamel.image)
-            implementation(project(":theme"))
+            implementation(project(":commons"))
             implementation(project(":domain"))
 
         }
@@ -70,7 +70,7 @@ android {
     }
 }
 dependencies {
-    implementation(project(":theme"))
+    implementation(project(":commons"))
     implementation(libs.androidx.foundation.android)
 }
 

@@ -1,4 +1,4 @@
-package com.example.home.ui.screens
+package com.example.home.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -19,11 +19,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.theme.AppTheme
-import com.example.theme.resources.Res
-import com.example.theme.resources.arrow_right
-import com.example.theme.resources.toggle_visibility
-import com.example.theme.resources.wait_clock
+import com.example.commons.theme.AppTheme
+import com.example.commons.theme.resources.Res
+import com.example.commons.theme.resources.arrow_right
+import com.example.commons.theme.resources.toggle_visibility
+import com.example.commons.theme.resources.wait_clock
 import org.jetbrains.compose.resources.painterResource
 
 @Composable

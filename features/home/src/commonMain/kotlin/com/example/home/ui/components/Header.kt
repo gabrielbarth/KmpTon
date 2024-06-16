@@ -1,4 +1,4 @@
-package com.example.home.ui.screens
+package com.example.home.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -15,9 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.theme.AppTheme
-import com.example.theme.resources.Res
-import com.example.theme.resources.menu_hamburger
+import com.example.commons.theme.AppTheme
+import com.example.commons.theme.resources.Res
+import com.example.commons.theme.resources.menu_hamburger
 import org.jetbrains.compose.resources.painterResource
 
 

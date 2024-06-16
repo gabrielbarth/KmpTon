@@ -11,6 +11,8 @@ internal fun ProductsResponseDTO.toDomain(): Products =
     )
 
 private fun ProductItemResponseDTO.toDomain(): Product = Product(
-    buttonId = buttonId,
+    id = buttonId,
     order = order,
+    name = null,
+    icon = null
 )
