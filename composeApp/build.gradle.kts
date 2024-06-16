@@ -67,6 +67,7 @@ kotlin {
 
             implementation(project(":features:home"))
             implementation(project(":theme"))
+            implementation(project(":data"))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
