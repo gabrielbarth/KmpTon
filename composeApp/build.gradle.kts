@@ -66,6 +66,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             implementation(project(":features:home"))
+            implementation(project(":commons"))
+            implementation(project(":data"))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -114,5 +116,6 @@ android {
 dependencies {
     implementation(libs.androidx.ui.graphics.android)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(project(":commons"))
 }
 

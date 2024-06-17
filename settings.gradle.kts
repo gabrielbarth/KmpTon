@@ -30,3 +30,7 @@ dependencyResolutionManagement {
 
 include(":composeApp")
 include(":features:home")
+include(":domain")
+include(":data")
+include(":network")
+include(":commons")
